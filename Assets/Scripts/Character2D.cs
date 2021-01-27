@@ -23,6 +23,8 @@ public class Character2D : MonoBehaviour
     [SerializeField]
     LayerMask groundLayer;
 
+    public int points = 0;
+
     void Awake() 
     {
         anim = GetComponent<Animator>();
@@ -86,7 +88,7 @@ public class Character2D : MonoBehaviour
         {
             Coin coin = other.GetComponent<Coin>();
             Destroy(other.gameObject);
-            Debug.Log(coin.points);
+            points += coin.points;
         }
     }    
 }
