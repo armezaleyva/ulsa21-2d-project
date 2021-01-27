@@ -44,10 +44,21 @@ public class Character2D : MonoBehaviour
     // Para cosas de física
     void FixedUpdate() 
     {
-        if (jumpButton && IsGrounding)
+        anim.SetFloat("velocityY", rb2D.velocity.normalized.y);
+        anim.SetBool("grounding", IsGrounding);
+
+        if (jumpButton)
         {
+            anim.SetTrigger("jump");
             rb2D.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
+
+        /*
+        if (jumpButton && IsGrounding)
+        {
+            
+        }
+        */
     }
 
     Vector2 Axis
@@ -69,4 +80,13 @@ public class Character2D : MonoBehaviour
         Gizmos.color = rayColor;
         Gizmos.DrawRay(transform.position, Vector2.down * rayDistance);
     }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Coin")) 
+        {
+            Coin coin = other.GetComponent<Coin>();
+            Destroy(other.gameObject);
+            Debug.Log(coin.points);
+        }
+    }    
 }
