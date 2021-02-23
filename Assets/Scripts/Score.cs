@@ -1,24 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class Score : MonoBehaviour
 {
-    [SerializeField]
-    Character2D player;
-    [SerializeField]
-    Text scoreText;
+   TextMeshProUGUI txtScore;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   int currentPoints;
 
-    // Update is called once per frame
-    void Update()
+   void Awake()
+   {
+       txtScore = GetComponent<TextMeshProUGUI>();
+   }
+
+    public void AddPoints(int points)
     {
-        scoreText.text = player.points.ToString();   
+        currentPoints += points;
+        txtScore.text = $"<b>Score:</b> <color=#ffff>{currentPoints} pts</color>";
     }
 }
